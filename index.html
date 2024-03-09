@@ -1,5 +1,8 @@
 <script src="https://cdn.jsdelivr.net/gh/netizenorg/netnet-standard-library/build/nn.min.js"></script>
 <script src="https://tonejs.github.io/build/Tone.js"></script>
+<button>
+  play audio
+</button>
 <script>
   /* global nn, Tone */
   
@@ -615,7 +618,7 @@
         changeSize(btn)
       }
       if (btn === "Play Audio"){
-        playAudio()
+        play()
       }
       if (btn === "Loop"){
         setLoop()
@@ -832,7 +835,7 @@
   let rhythm
   let measureNum = 0
   
-  function playAudio(){
+  function play(){
     if (Tone.Transport.state === 'started') {
       Tone.Transport.stop()
       buttons[0].resetColor()
@@ -853,7 +856,7 @@
     }
   }
   
-  function play(time){
+  function makeAudio(time){
     let t = time
     if (measureNum < noteList.length){
       for (let i=0; i<noteList[measureNum].length;i++){
@@ -874,7 +877,8 @@
   }
   
   Tone.Transport.bpm.value = 120
-  Tone.Transport.scheduleRepeat(time => play(time), "1m")
+  Tone.Transport.scheduleRepeat(time => makeAudio(time), "1m")
+  nn.get('button').on('click', play)
   nn.on('mousemove', pointToMagnitude)
   nn.on('mousedown', select)
   nn.on('mousedown', down)
