@@ -1,8 +1,5 @@
 <script src="https://cdn.jsdelivr.net/gh/netizenorg/netnet-standard-library/build/nn.min.js"></script>
 <script src="https://tonejs.github.io/build/Tone.js"></script>
-<button>
-  play audio
-</button>
 <script>
   /* global nn, Tone */
   
@@ -878,7 +875,7 @@
   
   Tone.Transport.bpm.value = 120
   Tone.Transport.scheduleRepeat(time => makeAudio(time), "1m")
-  nn.get('button').on('click', play)
+  nn.on('click', Tone.start)
   nn.on('mousemove', pointToMagnitude)
   nn.on('mousedown', select)
   nn.on('mousedown', down)
